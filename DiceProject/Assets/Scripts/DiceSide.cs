@@ -8,12 +8,20 @@ public class DiceSide : MonoBehaviour
     private DiceController _diceController;
     [SerializeField] private TextMeshProUGUI sideText;
 
-    private bool _sendResult = true; 
+    private bool _sendResult = false; 
 
     [SerializeField] private int topSideNumber;
     void Start()
     {
         _diceController = transform.parent.gameObject.GetComponent<DiceController>();
+        DiceController.RollDice += UnblockSendingResults;
+        DragAndThrow.DiceThrown += UnblockSendingResults;
+    }
+
+    private void OnDestroy()
+    {
+        DiceController.RollDice -= UnblockSendingResults;
+        DragAndThrow.DiceThrown -= UnblockSendingResults;
     }
 
     private void OnTriggerStay(Collider other)
@@ -26,7 +34,7 @@ public class DiceSide : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void UnblockSendingResults()
     {
         _sendResult = true;
     }

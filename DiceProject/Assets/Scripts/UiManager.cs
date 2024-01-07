@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
     [SerializeField] private Button rollDiceButton;
+    [SerializeField] private Button restartButton;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI totalScoreText;
     private int _totalScore;
@@ -12,14 +14,15 @@ public class UiManager : MonoBehaviour
     {
         rollDiceButton.onClick.AddListener(DiceInAir);
         rollDiceButton.onClick.AddListener(() => DiceController.RollDice?.Invoke());
+        restartButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
         
         DiceSide.RollingResult += UpdateScore;
-        DragAndThrow.DiceThrown += DiceInAir;
+        DragAndThrow.DiceSelected += DiceInAir;
     }
     private void OnDestroy()
     {
         DiceSide.RollingResult -= UpdateScore;
-        DragAndThrow.DiceThrown -= DiceInAir;
+        DragAndThrow.DiceSelected -= DiceInAir;
     }
     
     void UpdateScore(int score)

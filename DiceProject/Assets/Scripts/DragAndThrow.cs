@@ -7,6 +7,7 @@ public class DragAndThrow : MonoBehaviour
 {
     #region Variables
 
+    public static Action DiceSelected;
     public static Action DiceThrown;
     
     private readonly List<Vector3> _dragTracking = new List<Vector3>();
@@ -55,6 +56,7 @@ public class DragAndThrow : MonoBehaviour
         
         _selectedRigidbody = diceHit.collider.gameObject.GetComponent<Rigidbody>();
         _diceMoveTween = _selectedRigidbody.DOMoveY(dicePosY, pickUpAnimDuration).SetEase(pickUpEase);
+        DiceSelected?.Invoke();
     }
     
     private void Drag()
