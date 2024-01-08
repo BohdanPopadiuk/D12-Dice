@@ -27,9 +27,10 @@ public class UiManager : MonoBehaviour
     
     void UpdateScore(int score)
     {
-        _totalScore += score;
         rollDiceButton.interactable = true;
-        scoreText.text = "Result: " + score;
+        
+        if (score > 0) _totalScore += score;
+        scoreText.text = "Result: " + (score > 0 ? score : "?");
         totalScoreText.text = "Total: " + _totalScore;
     }
     void DiceInAir()
