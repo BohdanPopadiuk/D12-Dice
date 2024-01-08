@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8667246724411469499}
   - component: {fileID: 5188213905582270347}
   - component: {fileID: 2864281142426669308}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DiceFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2864281142426669308
 MonoBehaviour:
@@ -60,10 +60,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sideText: {fileID: 8405792341743034134}
-  sideNumber: 0
-  tableLeyerMask:
+  topSideNumber: 0
+  faceLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 2048
 --- !u!1 &1226627197944173256
 GameObject:
   m_ObjectHideFlags: 0

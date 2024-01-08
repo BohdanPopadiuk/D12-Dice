@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 public class DiceGenerator : MonoBehaviour
 {
@@ -96,7 +97,9 @@ public class DiceGenerator : MonoBehaviour
             Vector3 faceNormal = Vector3.Cross(faces[i][1] - faces[i][0], faces[i][2] - faces[i][0]).normalized;
 
             // Spawn a face prefab and set its position and rotation
-            DiceSide spawnedSide = Instantiate(facePrefab, faceCenter, Quaternion.identity, transform);
+            DiceSide spawnedSide = PrefabUtility.InstantiatePrefab(facePrefab, transform) as DiceSide;
+                //Instantiate(facePrefab, faceCenter, Quaternion.identity, transform);
+            spawnedSide.transform.position = faceCenter;
             spawnedSide.transform.rotation = Quaternion.LookRotation(faceNormal, transform.up);
         }
 
@@ -115,22 +118,23 @@ public class DiceGenerator : MonoBehaviour
         }
         
         //set face value, and set the value of the parallel face that will be at the top
-        
-        //ToDo переробити алгоритм :)
-        int faceIndex = 0;
+
+        List<DiceSide> faces = new List<DiceSide>();
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (faceIndex >= 4) faceIndex = 0;
-            faceIndex++;
-
             int faceNumber = faceNumbers[i];
-            int topSideNumber = faceIndex <= 2 ? faceNumber + 2 : faceNumber - 2;
 
             DiceSide face = transform.GetChild(i).gameObject.GetComponent<DiceSide>();
             if (face == null) return;
+            faces.Add(face);
             
-            face.SetSideValue(faceNumber, topSideNumber);
+            face.SetSideValue(faceNumber);
             face.gameObject.name = faceNumber.ToString();
+        }
+        
+        for (int i = 0; i < faces.Count; i++)
+        {
+            faces[i].SetTopSideValue();
         }
     }
 
