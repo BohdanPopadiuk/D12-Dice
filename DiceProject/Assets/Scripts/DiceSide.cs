@@ -61,5 +61,6 @@ public class DiceSide : MonoBehaviour
             if(hit.collider != null)
                 topSideNumber = hit.collider.gameObject.GetComponent<DiceSide>().SideNumber;
         }
+        gameObject.name = $"Face {SideNumber} - {topSideNumber}";
     }
 }

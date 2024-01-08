@@ -8,6 +8,7 @@ public class DiceGenerator : MonoBehaviour
     [SerializeField] private DiceSide facePrefab;
     [SerializeField] private int verticesPerFace = 5;
     [SerializeField] private List<int> faceNumbers;
+    [SerializeField] private List<DiceSide> diceSides;
     
     #endregion
 
@@ -46,11 +47,18 @@ public class DiceGenerator : MonoBehaviour
         #region Cleaning
 
         //clean the faces during regeneration
-        faceNumbers.Clear();
-        while(transform.childCount > 0)
+
+        while (diceSides.Count > 0)
         {
-            DestroyImmediate(transform.GetChild(0).gameObject);
+            if(diceSides[0] != null)
+            {
+                DestroyImmediate(diceSides[0].gameObject);
+            }
+            diceSides.RemoveAt(0);
         }
+
+        faceNumbers.Clear();
+        diceSides.Clear();
 
         #endregion
         ////////////////////////////////////////////////////////////////////////
@@ -97,10 +105,9 @@ public class DiceGenerator : MonoBehaviour
             Vector3 faceNormal = Vector3.Cross(faces[i][1] - faces[i][0], faces[i][2] - faces[i][0]).normalized;
 
             // Spawn a face prefab and set its position and rotation
-            DiceSide spawnedSide = PrefabUtility.InstantiatePrefab(facePrefab, transform) as DiceSide;
-                //Instantiate(facePrefab, faceCenter, Quaternion.identity, transform);
-            spawnedSide.transform.position = faceCenter;
+            DiceSide spawnedSide = Instantiate(facePrefab, faceCenter, Quaternion.identity, transform);
             spawnedSide.transform.rotation = Quaternion.LookRotation(faceNormal, transform.up);
+            diceSides.Add(spawnedSide);
         }
 
         #endregion
@@ -109,7 +116,7 @@ public class DiceGenerator : MonoBehaviour
 
     public void UpdateFaces()
     {
-        if (transform.childCount != faceNumbers.Count)
+        if (transform.childCount < faceNumbers.Count)
         {
             Debug.LogError("Face count must be equal to the FaceNumbers count! " +
                            "Please manually resize the FaceNumbers list " +
@@ -119,22 +126,14 @@ public class DiceGenerator : MonoBehaviour
         
         //set face value, and set the value of the parallel face that will be at the top
 
-        List<DiceSide> faces = new List<DiceSide>();
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < diceSides.Count; i++)
         {
-            int faceNumber = faceNumbers[i];
-
-            DiceSide face = transform.GetChild(i).gameObject.GetComponent<DiceSide>();
-            if (face == null) return;
-            faces.Add(face);
-            
-            face.SetSideValue(faceNumber);
-            face.gameObject.name = faceNumber.ToString();
+            diceSides[i].SetSideValue(faceNumbers[i]);
         }
         
-        for (int i = 0; i < faces.Count; i++)
+        for (int i = 0; i < diceSides.Count; i++)
         {
-            faces[i].SetTopSideValue();
+            diceSides[i].SetTopSideValue();
         }
     }
 
