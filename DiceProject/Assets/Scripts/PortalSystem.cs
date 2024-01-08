@@ -1,4 +1,4 @@
-using DG.Tweening;
+using ObjectsPool;
 using UnityEngine;
 
 public class PortalSystem : MonoBehaviour
@@ -17,7 +17,13 @@ public class PortalSystem : MonoBehaviour
     {
         if (other.CompareTag("Dice"))
         {
+            Transform portalEffect1 = PortalPoolBase.Instance.PortalEffectPool.Get().transform;
+            Transform portalEffect2 = PortalPoolBase.Instance.PortalEffectPool.Get().transform;
+            
             Rigidbody diceRb = other.gameObject.GetComponent<Rigidbody>();
+            
+            portalEffect1.position = diceRb.transform.position;
+            portalEffect1.rotation = Quaternion.LookRotation(diceRb.velocity.normalized);
 
             float posX = portalAxis == PortalAxis.XAxisPortal
                 ? diceRb.position.x
@@ -27,6 +33,9 @@ public class PortalSystem : MonoBehaviour
                 : (secondPortal.position + secondPortal.forward * (secondPortal.localScale.z * 0.5f + portalOffset)).z;
 
             diceRb.transform.position = new Vector3(posX, diceRb.position.y, posZ);
+            
+            portalEffect2.position = diceRb.transform.position;
+            portalEffect2.rotation = Quaternion.LookRotation(diceRb.velocity.normalized);
         }
     }
 }

@@ -10,6 +10,7 @@ public class DragAndThrow : MonoBehaviour
     public static Action<bool> DiceThrown;//false - Weak Throw | true - Normal Throw
 
     private readonly List<Vector3> _dragTracking = new List<Vector3>();
+    private Vector3 _dragPoint;
     private Vector3 _diceOffset = new Vector3();
     
     private Rigidbody _selectedRigidbody;
@@ -83,7 +84,11 @@ public class DragAndThrow : MonoBehaviour
             // The history of mouse movement over the last 15 frames,
             // which can then be used to give the throw force and direction and torque
             if (_dragTracking.Count > 15) _dragTracking.RemoveAt(0);
-            _dragTracking.Add(_selectedRigidbody.transform.position); //new Vector3(hit.point.x, dicePosY, hit.point.z));
+
+            _dragPoint = Vector3.Lerp(_dragPoint, new Vector3(hit.point.x, dicePosY, hit.point.z),
+                dragSpeed * Time.deltaTime);
+            
+            _dragTracking.Add(_dragPoint);
         }
     }
     
