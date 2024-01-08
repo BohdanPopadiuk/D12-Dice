@@ -46,7 +46,7 @@ public class DragAndThrow : MonoBehaviour
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, rayPanelLayerMask))
-        // The history of mouse movement over the last 15 frames,
+        // The history of mouse movement over the last 10 frames,
         // which can then be used to give the throw force and direction and torque
         if (_dragTracking.Count > 10) _dragTracking.RemoveAt(0);
         _dragTracking.Add(new Vector3(hit.point.x, dicePosY, hit.point.z));
@@ -86,9 +86,9 @@ public class DragAndThrow : MonoBehaviour
             float zPos = Mathf.Clamp(hit.point.z - _diceOffset.z,
                 walls[3].position.z + wallOffset, walls[1].position.z - wallOffset);
             
-            Cursor.visible = Vector3.Distance(hit.point, new Vector3(xPos, hit.point.y, zPos)) > 3.0f;
+            Cursor.visible = Vector3.Distance(hit.point, new Vector3(xPos, hit.point.y, zPos)) > 4.0f;
             
-            // The dice can move only above the table, so that the player does not release the dice outside the table
+            // The die can only move above the table and also has a delay so it doesn't accelerate to extreme speed
             Vector3 diceTargetPos = new Vector3(xPos, dicePosY, zPos);
             _selectedRigidbody.transform.position = Vector3.Lerp(_selectedRigidbody.transform.position, diceTargetPos,
                 dragSpeed * Time.deltaTime);
@@ -103,7 +103,9 @@ public class DragAndThrow : MonoBehaviour
         _selectedRigidbody.useGravity = true;
         _selectedRigidbody.freezeRotation = false;
         
+        //throw direction and force based on cursor history
         Vector3 forceDirection = _dragTracking[^1] - _dragTracking[0];
+        //limiting the speed of the cube so that it does not fly out of orbit :)
         forceDirection = Vector3.ClampMagnitude(forceDirection, 4);
         
         Vector3 throwForce = forceDirection * throwMultiplier;
@@ -114,10 +116,10 @@ public class DragAndThrow : MonoBehaviour
         
         _selectedRigidbody = null;
         
-        DiceThrown?.Invoke(NormalThrow(throwForce));
+        DiceThrown?.Invoke(NormalThrow(throwForce));//send the throw status
     }
 
-    private bool NormalThrow(Vector3 throwForce)
+    private bool NormalThrow(Vector3 throwForce) //checking that the diсe has enough speed for the number to be random
     {
         return Math.Abs(throwForce.x) > minThrowVelocity ||
                Math.Abs(throwForce.y) > minThrowVelocity ||

@@ -15,6 +15,7 @@ public class PortalSystem : MonoBehaviour
 
     IEnumerator Teleportation(Collider col)
     {
+        //turn everything off, open two portals, transfer the dice and turn everything on
         Rigidbody rb = col.gameObject.GetComponent<Rigidbody>();
         Vector3 defaultScale = rb.transform.localScale;
         Vector3 velocity = rb.velocity;

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 public class DiceGenerator : MonoBehaviour
 {
@@ -124,13 +123,13 @@ public class DiceGenerator : MonoBehaviour
             return;
         }
         
-        //set face value, and set the value of the parallel face that will be at the top
-
+        //set face value
         for (int i = 0; i < diceSides.Count; i++)
         {
             diceSides[i].SetSideValue(faceNumbers[i]);
         }
         
+        //set the value of the parallel face that will be at the top
         for (int i = 0; i < diceSides.Count; i++)
         {
             diceSides[i].SetTopSideValue();

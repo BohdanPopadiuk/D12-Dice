@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ObjectsPool
 {
@@ -7,8 +6,9 @@ namespace ObjectsPool
     {
         public static PortalPoolBase Instance;
         [SerializeField] private PortalEffect portalEffectPrefab;
-        public GameObjectPool PortalEffectPool { get; private set; }
         
+        //common pool of objects for portals
+        public GameObjectPool PortalEffectPool { get; private set; }
 
         private void Awake()
         {

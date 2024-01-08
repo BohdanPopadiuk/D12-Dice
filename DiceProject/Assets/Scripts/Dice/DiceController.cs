@@ -21,7 +21,7 @@ public class DiceController : MonoBehaviour
         RollDice -= Roll;
     }
 
-    void Roll()
+    private void Roll()//automatic roll
     {
         _rb.AddForce(Vector3.up * rollingForce);
         Vector3 randomTorque = new Vector3(
