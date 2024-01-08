@@ -12,6 +12,7 @@ public class UiManager : MonoBehaviour
     private int _totalScore;
     void Start()
     {
+        Application.targetFrameRate = 60;
         rollDiceButton.onClick.AddListener(DiceInAir);
         rollDiceButton.onClick.AddListener(() => DiceController.RollDice?.Invoke());
         restartButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));

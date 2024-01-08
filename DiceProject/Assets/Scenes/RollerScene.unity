@@ -1627,9 +1627,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dec3da01ae52664b932c221f860c0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minThrowVelocity: 7000000
-  throwMultiplier: 5000000
-  torqueMultiplier: 5000000
+  minThrowVelocity: 3000000
+  throwMultiplier: 2500000
+  torqueMultiplier: 2500000
   wallOffset: 3.5
   dicePosY: 3
   dragSpeed: 6
