@@ -15,7 +15,7 @@ namespace ObjectsPool
             Instance = this;
             if(Instance != null) Destroy(this);
 
-            PortalEffectPool = new GameObjectPool(portalEffectPrefab.gameObject, 5);
+            PortalEffectPool = new GameObjectPool(portalEffectPrefab.gameObject, 3);
         }
     }
 }

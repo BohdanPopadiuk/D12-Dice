@@ -8,7 +8,6 @@ public class DiceController : MonoBehaviour
     private Rigidbody _rb;
     [SerializeField] private float rollingForce = 50000;
     [SerializeField] private float maxRandomTorque = 50000;
-    private float RandomTorque() => Random.Range(0, maxRandomTorque);
     public bool DiceOnGround => _rb.velocity == Vector3.zero;
     
     void Start()
@@ -24,8 +23,11 @@ public class DiceController : MonoBehaviour
 
     void Roll()
     {
-        Vector3 direction = Vector3.up;
-        _rb.AddForce(direction * rollingForce);
-        _rb.AddTorque(RandomTorque(), RandomTorque(), RandomTorque());
+        _rb.AddForce(Vector3.up * rollingForce);
+        Vector3 randomTorque = new Vector3(
+            Random.Range(0, maxRandomTorque),
+            Random.Range(0, maxRandomTorque),
+            Random.Range(0, maxRandomTorque));
+        _rb.AddTorque(randomTorque);
     }
 }

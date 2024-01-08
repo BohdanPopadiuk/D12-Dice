@@ -41,10 +41,22 @@ public class DragAndThrow : MonoBehaviour
         Drag();
     }
 
+    private void FixedUpdate()
+    {
+        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, rayPanelLayerMask))
+        // The history of mouse movement over the last 15 frames,
+        // which can then be used to give the throw force and direction and torque
+        if (_dragTracking.Count > 10) _dragTracking.RemoveAt(0);
+        _dragTracking.Add(new Vector3(hit.point.x, dicePosY, hit.point.z));
+    }
+
     #region Private Methods
 
     private void PickUp()
     {
+        _dragTracking.Clear();
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit diceHit, float.MaxValue, diceLayerMask);
         
@@ -74,21 +86,12 @@ public class DragAndThrow : MonoBehaviour
             float zPos = Mathf.Clamp(hit.point.z - _diceOffset.z,
                 walls[3].position.z + wallOffset, walls[1].position.z - wallOffset);
             
-            Cursor.visible = Vector3.Distance(hit.point, new Vector3(xPos, hit.point.y, zPos)) > 1.5f;
+            Cursor.visible = Vector3.Distance(hit.point, new Vector3(xPos, hit.point.y, zPos)) > 3.0f;
             
             // The dice can move only above the table, so that the player does not release the dice outside the table
             Vector3 diceTargetPos = new Vector3(xPos, dicePosY, zPos);
             _selectedRigidbody.transform.position = Vector3.Lerp(_selectedRigidbody.transform.position, diceTargetPos,
                 dragSpeed * Time.deltaTime);
-
-            // The history of mouse movement over the last 15 frames,
-            // which can then be used to give the throw force and direction and torque
-            if (_dragTracking.Count > 15) _dragTracking.RemoveAt(0);
-
-            _dragPoint = Vector3.Lerp(_dragPoint, new Vector3(hit.point.x, dicePosY, hit.point.z),
-                dragSpeed * Time.deltaTime);
-            
-            _dragTracking.Add(_dragPoint);
         }
     }
     
@@ -101,11 +104,13 @@ public class DragAndThrow : MonoBehaviour
         _selectedRigidbody.freezeRotation = false;
         
         Vector3 forceDirection = _dragTracking[^1] - _dragTracking[0];
+        forceDirection = Vector3.ClampMagnitude(forceDirection, 4);
+        
         Vector3 throwForce = forceDirection * throwMultiplier;
         Vector3 torque = new Vector3(forceDirection.z, forceDirection.y, -forceDirection.x) * torqueMultiplier;
         
-        _selectedRigidbody.AddForce(throwForce);
-        _selectedRigidbody.AddTorque(torque);
+        _selectedRigidbody.AddForce(throwForce * Time.deltaTime);
+        _selectedRigidbody.AddTorque(torque * Time.deltaTime);
         
         _selectedRigidbody = null;
         

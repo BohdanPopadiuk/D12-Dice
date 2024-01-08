@@ -138,7 +138,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &43074225
 Transform:
@@ -317,11 +317,11 @@ GameObject:
   - component: {fileID: 57663574}
   - component: {fileID: 57663577}
   m_Layer: 0
-  m_Name: portal2
+  m_Name: WallPortal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &57663573
 Transform:
@@ -413,9 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c91a99fdf9e8d4ea94a68b4920e975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondPortal: {fileID: 120807959}
-  portalAxis: 0
-  portalOffset: 3.5
+  topTeleportPos: {fileID: 566537386}
 --- !u!1 &61748392
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,11 +630,11 @@ GameObject:
   - component: {fileID: 120807960}
   - component: {fileID: 120807963}
   m_Layer: 0
-  m_Name: portal4
+  m_Name: WallPortal4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &120807959
 Transform:
@@ -728,9 +726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c91a99fdf9e8d4ea94a68b4920e975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondPortal: {fileID: 57663573}
-  portalAxis: 0
-  portalOffset: 3.5
+  topTeleportPos: {fileID: 566537386}
 --- !u!1 &192160639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,12 +1058,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293832207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.56, y: 2.492, z: -2.36}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &403641754
 GameObject:
@@ -1631,12 +1627,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dec3da01ae52664b932c221f860c0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minThrowVelocity: 30000
-  throwMultiplier: 40000
-  torqueMultiplier: 40000
+  minThrowVelocity: 7000000
+  throwMultiplier: 5000000
+  torqueMultiplier: 5000000
   wallOffset: 3.5
   dicePosY: 3
-  dragSpeed: 8
+  dragSpeed: 6
   walls:
   - {fileID: 1286484754}
   - {fileID: 57663573}
@@ -1931,13 +1927,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558812730}
-  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalRotation: {x: 0.42261827, y: -0, z: -0, w: 0.9063079}
   m_LocalPosition: {x: 0, y: 0, z: -4.68}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 895851683}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1953787618}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2062,6 +2058,37 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &566537385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 566537386}
+  m_Layer: 6
+  m_Name: TopPortalPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &566537386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566537385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7, z: -0.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 851768423}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &603863263
 GameObject:
   m_ObjectHideFlags: 0
@@ -2131,7 +2158,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 47.299995}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 200, y: 39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &696329327
 MonoBehaviour:
@@ -2180,12 +2207,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 34.9
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10.3
+  m_fontSizeMax: 36
   m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -2311,7 +2338,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &851768420
 BoxCollider:
@@ -2394,6 +2421,7 @@ Transform:
   - {fileID: 2143155740}
   - {fileID: 120807959}
   - {fileID: 1395645240}
+  - {fileID: 566537386}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2993,8 +3021,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 262696752}
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1953787618}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3616,8 +3644,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -2.3}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: 0.96}
+  m_SizeDelta: {x: 200, y: 39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1123257266
 MonoBehaviour:
@@ -3666,12 +3694,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 34.9
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10.3
+  m_fontSizeMax: 36
   m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -3911,12 +3939,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191299992}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1953787618}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1286484753
@@ -3933,11 +3961,11 @@ GameObject:
   - component: {fileID: 1286484755}
   - component: {fileID: 1286484758}
   m_Layer: 0
-  m_Name: portal1
+  m_Name: WallPortal1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1286484754
 Transform:
@@ -4029,9 +4057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c91a99fdf9e8d4ea94a68b4920e975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondPortal: {fileID: 2143155740}
-  portalAxis: 1
-  portalOffset: 3.5
+  topTeleportPos: {fileID: 566537386}
 --- !u!1 &1330344916
 GameObject:
   m_ObjectHideFlags: 0
@@ -4096,37 +4122,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1363290406
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1363290407}
-  m_Layer: 0
-  m_Name: Holder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1363290407
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363290406}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1395645239
 GameObject:
   m_ObjectHideFlags: 0
@@ -4142,7 +4137,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1395645240
 Transform:
@@ -4586,7 +4581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643897991}
   m_LocalRotation: {x: -0, y: -0, z: 0.27329618, w: 0.96193}
-  m_LocalPosition: {x: -0.73, y: 1.92, z: -4.08}
+  m_LocalPosition: {x: -0.8, y: 2, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4620,7 +4615,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!64 &1643935913
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4647,8 +4642,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9dfc0df6fccd424fbc980b35bd54af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollingForce: 50000
-  maxRandomTorque: 50000
+  rollingForce: 75000
+  maxRandomTorque: 75000
 --- !u!114 &1643935915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5633,6 +5628,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949603350}
   m_CullTransparentMesh: 1
+--- !u!1 &1953787617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1953787618}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1953787618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953787617}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 955068554}
+  - {fileID: 558812734}
+  - {fileID: 1191299995}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1953894994
 GameObject:
   m_ObjectHideFlags: 0
@@ -6309,11 +6338,11 @@ GameObject:
   - component: {fileID: 2143155741}
   - component: {fileID: 2143155744}
   m_Layer: 0
-  m_Name: portal3
+  m_Name: WallPortal3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2143155740
 Transform:
@@ -6405,6 +6434,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c91a99fdf9e8d4ea94a68b4920e975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondPortal: {fileID: 1286484754}
-  portalAxis: 1
-  portalOffset: 3.5
+  topTeleportPos: {fileID: 566537386}
